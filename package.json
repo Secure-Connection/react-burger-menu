@@ -1,6 +1,6 @@
 {
   "name": "react-burger-menu",
-  "version": "1.7.0",
+  "version": "1.10.4",
   "description": "An off-canvas sidebar component with a collection of effects and styles using CSS transitions and SVG path animations",
   "main": "lib/BurgerMenu.js",
   "author": "Imogen Wentworth",
@@ -15,11 +15,9 @@
   "dependencies": {
     "browserify-optional": "^1.0.0",
     "classnames": "^2.1.1",
-    "imports-loader": "^0.6.4",
-    "radium": "^0.17.0",
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0",
-    "snapsvg": "^0.4.0"
+    "eve": "~0.4.2",
+    "radium": "^0.18.0",
+    "snapsvg-cjs": "0.0.4"
   },
   "devDependencies": {
     "babel-core": "^6.3.26",
@@ -28,15 +26,20 @@
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.3.13",
     "chai": "^3.2.0",
-    "eslint": "^2.1.0",
-    "eslint-plugin-react": "^4.2.0",
+    "eslint": "^3.0.0",
+    "eslint-plugin-react": "^6.0.0",
     "gulp": "^3.8.11",
-    "gulp-mocha": "^2.2.0",
-    "jsdom": "^8.0.2",
-    "mocha": "^2.3.4",
+    "gulp-git": "^1.8.0",
+    "gulp-mocha": "^3.0.0",
+    "jsdom": "^9.0.0",
+    "mocha": "^3.0.0",
     "react-addons-test-utils": "^15.0.0",
     "react-component-gulp-tasks": "^0.7.1",
     "sinon": "^1.16.1"
+  },
+  "peerDependencies": {
+    "react": ">=0.14.0 <16.0.0",
+    "react-dom": ">=0.14.0 <16.0.0"
   },
   "browserify": {
     "transform": [
@@ -54,14 +57,23 @@
     "examples": "gulp dev:server",
     "lint": "eslint ./; true",
     "publish:site": "gulp publish:examples",
-    "release": "gulp release",
+    "publish:version": "gulp commit:version && gulp push",
     "start": "gulp dev",
     "test": "gulp test --reporter dot",
     "tdd": "gulp watch:tests --reporter spec",
-    "watch": "gulp watch:lib"
+    "watch": "gulp watch:lib",
+    "release": "npm run build && gulp bump && npm run publish:version && gulp release",
+    "release:minor": "npm run build && gulp bump:minor && npm run publish:version && gulp release",
+    "release:major": "npm run build && gulp bump:major && npm run publish:version && gulp release"
+  },
+  "engines": {
+    "node": ">=4.0.0"
   },
   "readmeFilename": "README.md",
   "keywords": [
+    "component",
+    "hamburger",
+    "menu",
     "react",
     "react-component"
   ],
